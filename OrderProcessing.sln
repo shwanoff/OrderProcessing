@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessing.API", "OrderProcessing.API\OrderProcessing.API.csproj", "{43B5A26D-1D34-4024-863B-31223806AE2D}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessing.Domain", "OrderProcessing.Domain\OrderProcessing.Domain.csproj", "{32807E07-3DC9-419D-970E-14DA17B358AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessing.Application", "OrderProcessing.Application\OrderProcessing.Application.csproj", "{BC2DE976-ACCB-48CA-9125-A0AF023C77EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessing.Infrastructure", "OrderProcessing.Infrastructure\OrderProcessing.Infrastructure.csproj", "{6D76B916-C57C-4843-A3BC-6E2786A536D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessing.Tests", "OrderProcessing.Tests\OrderProcessing.Tests.csproj", "{C46A19C2-0389-4082-B7EA-4B6644BD24B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,22 @@ Global
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32807E07-3DC9-419D-970E-14DA17B358AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32807E07-3DC9-419D-970E-14DA17B358AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32807E07-3DC9-419D-970E-14DA17B358AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32807E07-3DC9-419D-970E-14DA17B358AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC2DE976-ACCB-48CA-9125-A0AF023C77EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC2DE976-ACCB-48CA-9125-A0AF023C77EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC2DE976-ACCB-48CA-9125-A0AF023C77EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC2DE976-ACCB-48CA-9125-A0AF023C77EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D76B916-C57C-4843-A3BC-6E2786A536D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D76B916-C57C-4843-A3BC-6E2786A536D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D76B916-C57C-4843-A3BC-6E2786A536D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D76B916-C57C-4843-A3BC-6E2786A536D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C46A19C2-0389-4082-B7EA-4B6644BD24B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C46A19C2-0389-4082-B7EA-4B6644BD24B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C46A19C2-0389-4082-B7EA-4B6644BD24B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C46A19C2-0389-4082-B7EA-4B6644BD24B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
