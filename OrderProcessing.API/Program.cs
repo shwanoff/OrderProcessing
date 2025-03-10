@@ -1,7 +1,18 @@
+using MartinCostello.OpenApi;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+// TODO: Fix issue with OpenAPI generation
+// There is a well-known issue with the OpenAPI generation
+// https://github.com/dotnet/aspnetcore/issues/57332#issuecomment-2479286855
+// To fix this issue, we need to add the following line of code from personal library
+// https://github.com/martincostello/openapi-extensions?tab=readme-ov-file
+builder.Services.AddOpenApiExtensions(options => options.AddServerUrls = true);
+builder.Services.AddHttpContextAccessor();
+// end of fix
 
 var app = builder.Build();
 
