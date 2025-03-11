@@ -6,6 +6,8 @@
 		uint Amount, 
 		decimal Price)
 	{
-
+		public Product() : this(default, default, default, default) 
+		{ 
+		}	
 	}
 }

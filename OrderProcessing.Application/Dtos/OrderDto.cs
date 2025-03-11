@@ -15,6 +15,9 @@
         { 
         }
 
-
+        public OrderDto()
+			: this(default, default, default, default, default, default)
+		{
+		}
 	}
 }

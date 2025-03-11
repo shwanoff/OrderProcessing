@@ -6,5 +6,10 @@
         int ProductAmount,
         decimal ProductPrice)
 	{
-    }
+		public ProductDto()
+			: this(default, default, default, default)
+		{
+		}
+
+	}
 }
