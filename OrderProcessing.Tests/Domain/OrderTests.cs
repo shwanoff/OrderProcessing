@@ -17,7 +17,7 @@ namespace OrderProcessing.Tests.Domain
 			};
 			var address = "123 Main St";
 			var email = "test@example.com";
-			var creditCard = "1234-5678-9101-1121";
+			var creditCard = "1234567890123452";
 
 			// Act
 			var order = new Order
@@ -48,7 +48,7 @@ namespace OrderProcessing.Tests.Domain
 			};
 			var address = "123 Main St";
 			var email = "test@example.com";
-			var creditCard = "1234-5678-9101-1121";
+			var creditCard = "1234567890123452";
 			var createdAt = new DateTime(2025, 3, 11, 10, 0, 0);
 			var id = Guid.NewGuid();
 			var order = new Order
