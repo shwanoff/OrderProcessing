@@ -12,8 +12,8 @@ namespace OrderProcessing.Tests.Domain
 			// Arrange
 			var products = new List<Product>
 			{
-				new("Laptop", 2, 1500.00m),
-				new("Mouse", 1, 25.00m)
+				new(1, "Laptop", 2, 1500.00m),
+				new(2, "Mouse", 1, 25.00m)
 			};
 			var address = "123 Main St";
 			var email = "test@example.com";
@@ -43,8 +43,8 @@ namespace OrderProcessing.Tests.Domain
 			// Arrange
 			var products = new List<Product>
 			{
-				new("Laptop", 2, 1500.00m),
-				new("Mouse", 1, 25.00m)
+				new(1, "Laptop", 2, 1500.00m),
+				new(2, "Mouse", 1, 25.00m)
 			};
 			var address = "123 Main St";
 			var email = "test@example.com";

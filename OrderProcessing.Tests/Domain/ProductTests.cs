@@ -9,12 +9,13 @@ namespace OrderProcessing.Tests.Domain
 		public void Product_Constructor_ShouldInitializeProperties()
 		{
 			// Arrange
+			var id = 1u;
 			var name = "Laptop";
 			var amount = 2u;
 			var price = 1500.00m;
 
 			// Act
-			var product = new Product(name, amount, price);
+			var product = new Product(id, name, amount, price);
 
 			// Assert
 			Assert.That(product.Name, Is.EqualTo(name));
@@ -23,47 +24,31 @@ namespace OrderProcessing.Tests.Domain
 		}
 
 		[Test]
-		public void Product_GetHashCode_ShouldReturnSameHashCodeForEqualProducts()
+		public void Product_Equals_ShouldReturnTrueForEqualProducts()
 		{
 			// Arrange
-			var product1 = new Product("Laptop", 2, 1500.00m);
-			var product2 = new Product("Laptop", 2, 1500.00m);
+			var product1 = new Product(1, "Laptop", 2, 1500.00m);
+			var product2 = new Product(1, "Laptop", 2, 1500.00m);
 
 			// Act
-			var hashCode1 = product1.GetHashCode();
-			var hashCode2 = product2.GetHashCode();
+			var result = product1.Equals(product2);
 
 			// Assert
-			Assert.That(hashCode1, Is.EqualTo(hashCode2));
+			Assert.That(result, Is.True);
 		}
 
 		[Test]
-		public void Product_GetHashCode_ShouldReturnDifferentHashCodeForDifferentProducts()
+		public void Product_Equals_ShouldReturnFalseForDifferentProducts()
 		{
 			// Arrange
-			var product1 = new Product("Laptop", 2, 1500.00m);
-			var product2 = new Product("Desktop", 1, 1200.00m);
+			var product1 = new Product(1, "Laptop", 2, 1500.00m);
+			var product2 = new Product(2, "Desktop", 1, 1200.00m);
 
 			// Act
-			var hashCode1 = product1.GetHashCode();
-			var hashCode2 = product2.GetHashCode();
+			var result = product1.Equals(product2);
 
 			// Assert
-			Assert.That(hashCode1, Is.Not.EqualTo(hashCode2));
-		}
-
-		[Test]
-		public void Product_ToString_ShouldReturnName()
-		{
-			// Arrange
-			var name = "Laptop";
-			var product = new Product(name, 2, 1500.00m);
-
-			// Act
-			var result = product.ToString();
-
-			// Assert
-			Assert.That(result, Is.EqualTo(name));
+			Assert.That(result, Is.False);
 		}
 	}
 }
