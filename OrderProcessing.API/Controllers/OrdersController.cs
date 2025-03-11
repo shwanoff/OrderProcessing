@@ -1,23 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using OrderProcessing.Application.Dtos;
+using OrderProcessing.Application.Handlers.Commands;
+using OrderProcessing.Application.Handlers.Queries;
 
 namespace OrderProcessing.API.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class OrdersController : ControllerBase
+	public class OrdersController(IMediator mediator) : ControllerBase
 	{
+		private readonly IMediator _mediator = mediator;
+
 		[HttpPost]
-		public IActionResult CreateOrder()
+		public async Task<IActionResult> CreateOrder([FromBody] OrderDto orderDto)
 		{
-			// TODO: Implement order creation
-			return Ok("CreateOrder endpoint");
+			var command = new CreateOrderCommand { Order = orderDto };
+			var orderId = await _mediator.Send(command);
+			return CreatedAtAction(nameof(GetOrder), new { orderNumber = orderId }, orderId);
 		}
 
 		[HttpGet("{orderNumber}")]
-		public IActionResult GetOrder(string orderNumber)
+		public async Task<IActionResult> GetOrder(Guid orderNumber)
 		{
-			// TODO: Implement order retrieval
-			return Ok($"GetOrder endpoint for order number: {orderNumber}");
+			var query = new GetOrderByIdQuery { Id = orderNumber };
+			var order = await _mediator.Send(query);
+			if (order == null)
+			{
+				return NotFound();
+			}
+			return Ok(order);
 		}
 	}
 }

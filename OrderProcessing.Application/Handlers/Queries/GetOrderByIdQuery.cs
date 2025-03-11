@@ -15,7 +15,7 @@ namespace OrderProcessing.Application.Handlers.Queries
 	{
 		private readonly IOrderRepository _orderRepository = orderRepository;
 		private readonly IMapper _mapper = mapper;
-		private readonly ILogger _logger = logger;
+		private readonly ILogger<GetOrderByIdQueryHandler> _logger = logger;
 
 		public async Task<OrderDto?> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
 		{

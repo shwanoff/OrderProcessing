@@ -13,11 +13,11 @@ namespace OrderProcessing.Application.Handlers.Commands
 		public required OrderDto Order { get; set; }
 	}
 
-	public class CreateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger logger) : IRequestHandler<CreateOrderCommand, Guid>
+	public class CreateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger<CreateOrderCommandHandler> logger) : IRequestHandler<CreateOrderCommand, Guid>
 	{
 		private readonly IOrderRepository _orderRepository = orderRepository;
 		private readonly IMapper _mapper = mapper;
-		private readonly ILogger _logger = logger;
+		private readonly ILogger<CreateOrderCommandHandler> _logger = logger;
 
 		public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
 		{
