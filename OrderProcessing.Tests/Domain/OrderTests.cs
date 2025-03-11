@@ -1,4 +1,5 @@
 ﻿using OrderProcessing.Domain;
+using NUnit.Framework;
 
 namespace OrderProcessing.Tests.Domain
 {
@@ -11,31 +12,29 @@ namespace OrderProcessing.Tests.Domain
 			// Arrange
 			var products = new List<Product>
 			{
-				new() { Name = "Laptop", Amount = 2, Price = 1500.00m },
-				new() { Name = "Mouse", Amount = 1, Price = 25.00m }
+				new("Laptop", 2, 1500.00m),
+				new("Mouse", 1, 25.00m)
 			};
-			var invoice = new Invoice
-			{
-				Address = "123 Main St",
-				Email = "test@example.com",
-				CreditCard = "1234-5678-9101-1121"
-			};
-			var createdAt = DateTime.UtcNow;
+			var address = "123 Main St";
+			var email = "test@example.com";
+			var creditCard = "1234-5678-9101-1121";
 
 			// Act
 			var order = new Order
 			{
-				Id = 1,
 				Products = products,
-				Invoice = invoice,
-				CreatedAt = createdAt
+				Address = address,
+				Email = email,
+				CreditCard = creditCard
 			};
 
 			// Assert
-			Assert.That(order.Id, Is.EqualTo(1));
 			Assert.That(order.Products, Is.EqualTo(products));
-			Assert.That(order.Invoice, Is.EqualTo(invoice));
-			Assert.That(order.CreatedAt, Is.EqualTo(createdAt));
+			Assert.That(order.Address, Is.EqualTo(address));
+			Assert.That(order.Email, Is.EqualTo(email));
+			Assert.That(order.CreditCard, Is.EqualTo(creditCard));
+			Assert.That(order.Id, Is.Not.EqualTo(Guid.Empty));
+			Assert.That(order.CreatedAt, Is.EqualTo(DateTime.UtcNow).Within(1).Seconds);
 		}
 
 		[Test]
@@ -44,21 +43,21 @@ namespace OrderProcessing.Tests.Domain
 			// Arrange
 			var products = new List<Product>
 			{
-				new() { Name = "Laptop", Amount = 2, Price = 1500.00m },
-				new() { Name = "Mouse", Amount = 1, Price = 25.00m }
+				new("Laptop", 2, 1500.00m),
+				new("Mouse", 1, 25.00m)
 			};
-			var invoice = new Invoice
-			{
-				Address = "123 Main St",
-				Email = "test@example.com",
-				CreditCard = "1234-5678-9101-1121"
-			};
+			var address = "123 Main St";
+			var email = "test@example.com";
+			var creditCard = "1234-5678-9101-1121";
 			var createdAt = new DateTime(2025, 3, 11, 10, 0, 0);
+			var id = Guid.NewGuid();
 			var order = new Order
 			{
-				Id = 1,
+				Id = id,
 				Products = products,
-				Invoice = invoice,
+				Address = address,
+				Email = email,
+				CreditCard = creditCard,
 				CreatedAt = createdAt
 			};
 
@@ -66,7 +65,7 @@ namespace OrderProcessing.Tests.Domain
 			var result = order.ToString();
 
 			// Assert
-			Assert.That(result, Is.EqualTo("#1 2025-03-11 10:00:00"));
+			Assert.That(result, Is.EqualTo($"#{order.Id} {email} 2025-03-11 10:00:00"));
 		}
 	}
 }

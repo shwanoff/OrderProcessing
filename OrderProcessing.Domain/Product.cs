@@ -1,12 +1,12 @@
 ﻿namespace OrderProcessing.Domain
 {
-    public struct Product
+    public record Product(string name, uint amount, decimal price)
 	{
-		public required string Name { get; set; }
-		public required uint Amount { get; set; }
-		public required decimal Price { get; set; }
+		public string Name { get; } = name;
+		public uint Amount { get; } = amount;
+		public decimal Price { get; } = price;
 
-		public override readonly int GetHashCode()
+		public override int GetHashCode()
 		{
 			return HashCode.Combine(
 				Name.ToUpperInvariant(),
@@ -15,32 +15,7 @@
 			);
 		}
 
-		public override readonly bool Equals(object? obj)
-		{
-			if (obj is Product other)
-			{
-				if (GetHashCode() != other.GetHashCode())
-				{
-					return false;
-				}
-				return Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase) &&
-					   Amount == other.Amount &&
-					   Price == other.Price;
-			}
-			return false;
-		}
-
-		public static bool operator ==(Product left, Product right)
-		{
-			return left.Equals(right);
-		}
-
-		public static bool operator !=(Product left, Product right)
-		{
-			return !(left.Equals(right));
-		}
-
-		public override readonly string ToString()
+		public override string ToString()
 		{
 			return Name;
 		}

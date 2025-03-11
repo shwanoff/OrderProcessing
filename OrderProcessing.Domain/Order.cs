@@ -2,14 +2,16 @@
 {
 	public class Order
 	{
-		public required uint Id { get; set; }
-		public required List<Product> Products { get; set; }
-		public required Invoice Invoice { get; set; }
-		public required DateTime CreatedAt { get; set; }
+		public Guid Id { get; set; } = Guid.NewGuid();
+		public required IReadOnlyList<Product> Products { get; set; }
+		public required string Address { get; set; }
+		public required string Email { get; set; }
+		public required string CreditCard { get; set; }
+		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 		public override string ToString()
 		{
-			return $"#{Id} {CreatedAt:yyyy-MM-dd HH:mm:ss}";
+			return $"#{Id} {Email} {CreatedAt:yyyy-MM-dd HH:mm:ss}";
 		}
 	}
 }

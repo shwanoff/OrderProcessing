@@ -6,39 +6,28 @@ namespace OrderProcessing.Tests.Domain
 	public class ProductTests
 	{
 		[Test]
-		public void Product_Equals_ShouldReturnTrueForEqualProducts()
+		public void Product_Constructor_ShouldInitializeProperties()
 		{
 			// Arrange
-			var product1 = new Product { Name = "Laptop", Amount = 2, Price = 1500.00m };
-			var product2 = new Product { Name = "Laptop", Amount = 2, Price = 1500.00m };
+			var name = "Laptop";
+			var amount = 2u;
+			var price = 1500.00m;
 
 			// Act
-			var result = product1.Equals(product2);
+			var product = new Product(name, amount, price);
 
 			// Assert
-			Assert.That(result, Is.True);
-		}
-
-		[Test]
-		public void Product_Equals_ShouldReturnFalseForDifferentProducts()
-		{
-			// Arrange
-			var product1 = new Product { Name = "Laptop", Amount = 2, Price = 1500.00m };
-			var product2 = new Product { Name = "Desktop", Amount = 1, Price = 1200.00m };
-
-			// Act
-			var result = product1.Equals(product2);
-
-			// Assert
-			Assert.That(result, Is.False);
+			Assert.That(product.Name, Is.EqualTo(name));
+			Assert.That(product.Amount, Is.EqualTo(amount));
+			Assert.That(product.Price, Is.EqualTo(price));
 		}
 
 		[Test]
 		public void Product_GetHashCode_ShouldReturnSameHashCodeForEqualProducts()
 		{
 			// Arrange
-			var product1 = new Product { Name = "Laptop", Amount = 2, Price = 1500.00m };
-			var product2 = new Product { Name = "Laptop", Amount = 2, Price = 1500.00m };
+			var product1 = new Product("Laptop", 2, 1500.00m);
+			var product2 = new Product("Laptop", 2, 1500.00m);
 
 			// Act
 			var hashCode1 = product1.GetHashCode();
@@ -52,8 +41,8 @@ namespace OrderProcessing.Tests.Domain
 		public void Product_GetHashCode_ShouldReturnDifferentHashCodeForDifferentProducts()
 		{
 			// Arrange
-			var product1 = new Product { Name = "Laptop", Amount = 2, Price = 1500.00m };
-			var product2 = new Product { Name = "Desktop", Amount = 1, Price = 1200.00m };
+			var product1 = new Product("Laptop", 2, 1500.00m);
+			var product2 = new Product("Desktop", 1, 1200.00m);
 
 			// Act
 			var hashCode1 = product1.GetHashCode();
@@ -67,13 +56,14 @@ namespace OrderProcessing.Tests.Domain
 		public void Product_ToString_ShouldReturnName()
 		{
 			// Arrange
-			var product = new Product { Name = "Laptop", Amount = 2, Price = 1500.00m };
+			var name = "Laptop";
+			var product = new Product(name, 2, 1500.00m);
 
 			// Act
 			var result = product.ToString();
 
 			// Assert
-			Assert.That(result, Is.EqualTo("Laptop"));
+			Assert.That(result, Is.EqualTo(name));
 		}
 	}
 }
