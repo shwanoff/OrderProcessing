@@ -2,12 +2,12 @@
 {
     public record OrderDto
     (
-        Guid OrderNumber,
+        Guid? OrderNumber,
         string InvoiceAddress,
         string InvoiceEmailAddress,
         string InvoiceCreditCardNumber,
         IReadOnlyList<ProductDto> Products,
-		DateTime CreatedAt
+		DateTime? CreatedAt
     )
     {
         public OrderDto(string InvoiceAddress, string InvoiceEmailAddress, string InvoiceCreditCardNumber, IReadOnlyList<ProductDto> Products)

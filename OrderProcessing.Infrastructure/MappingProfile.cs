@@ -13,16 +13,16 @@ namespace OrderProcessing.Infrastructure
 				.ForMember(dest => dest.OrderNumber, opt => opt.MapFrom(src => src.Id))
 				.ForMember(dest => dest.InvoiceAddress, opt => opt.MapFrom(src => src.Address))
 				.ForMember(dest => dest.InvoiceEmailAddress, opt => opt.MapFrom(src => src.Email))
-				.ForMember(dest => dest.InvoiceCreditCardNumber, opt => opt.MapFrom(src => src.CreditCard))
+				.ForMember(dest => dest.InvoiceCreditCardNumber, opt => opt.MapFrom(src => src.CreditCard.FormatCreditCard()))
 				.ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Products))
 				.ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
 				.ReverseMap()
-				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrderNumber))
+				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrderNumber ?? Guid.NewGuid()))
 				.ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.InvoiceAddress))
 				.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.InvoiceEmailAddress))
-				.ForMember(dest => dest.CreditCard, opt => opt.MapFrom(src => src.InvoiceCreditCardNumber))
+				.ForMember(dest => dest.CreditCard, opt => opt.MapFrom(src => src.InvoiceCreditCardNumber.RemoveCreditCardFormatting()))
 				.ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Products))
-				.ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt));
+				.ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt ?? DateTime.UtcNow));
 
 			CreateMap<Product, ProductDto>()
 				.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))

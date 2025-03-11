@@ -24,11 +24,11 @@ namespace OrderProcessing.Application.Handlers.Commands
 			try
 			{
 				var order = _mapper.Map<Order>(request.Order);
-				await _orderRepository.AddAsync(order);
+				var orderId = await _orderRepository.AddAsync(order);
 				
-				_logger.LogInformation("Order created: {OrderId}", order.Id);
+				_logger.LogInformation("Order created: {OrderId}", orderId);
 				
-				return order.Id;
+				return orderId;
 			}
 			catch (Exception ex)
 			{

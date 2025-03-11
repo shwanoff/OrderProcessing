@@ -59,7 +59,7 @@ namespace OrderProcessing.Tests.Infrastructure
 			Assert.That(orderDto.OrderNumber, Is.EqualTo(order.Id));
 			Assert.That(orderDto.InvoiceAddress, Is.EqualTo(order.Address));
 			Assert.That(orderDto.InvoiceEmailAddress, Is.EqualTo(order.Email));
-			Assert.That(orderDto.InvoiceCreditCardNumber, Is.EqualTo(order.CreditCard));
+			Assert.That(orderDto.InvoiceCreditCardNumber, Is.EqualTo(order.CreditCard.FormatCreditCard()));
 			Assert.That(orderDto.CreatedAt, Is.EqualTo(order.CreatedAt));
 			Assert.That(orderDto.Products.Count, Is.EqualTo(order.Products.Count));
 		}

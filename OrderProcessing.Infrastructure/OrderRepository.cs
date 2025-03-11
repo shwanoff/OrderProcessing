@@ -14,8 +14,10 @@ namespace OrderProcessing.Infrastructure
 		public async Task<Guid> AddAsync(Order order)
 		{
 			var orderEntity = _mapper.Map<OrderEntity>(order);
+
 			await _context.Orders.AddAsync(orderEntity);
 			await _context.SaveChangesAsync();
+
 			return orderEntity.Id;
 		}
 
