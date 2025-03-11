@@ -11,6 +11,8 @@ services:
       - 8081:8081
     depends_on:
       - sqlserver
+    networks:
+      - orderprocessing 
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -21,6 +23,12 @@ services:
       - "1433:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
+    networks:
+      - orderprocessing
+
+networks:
+  orderprocessing:
+    driver: bridge
 
 volumes:
   sqlserverdata:

@@ -3,7 +3,6 @@ using FluentValidation.AspNetCore;
 using MartinCostello.OpenApi;
 using Microsoft.EntityFrameworkCore;
 using OrderProcessing.Application.Handlers.Commands;
-using OrderProcessing.Application.Interfaces;
 using OrderProcessing.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +23,7 @@ builder.Services.AddMediatRServices("OrderProcessing.Application");
 builder.Services.AddValidatorsFromAssemblyContaining<CreateOrderCommandValidator>();
 builder.Services.AddFluentValidationAutoValidation();
 
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddRepository();
 
 // TODO: Fix issue with OpenAPI generation
 // There is a well-known issue with the OpenAPI generation
@@ -36,6 +35,16 @@ builder.Services.AddHttpContextAccessor();
 // end of fix
 
 var app = builder.Build();
+
+// TODO: It is not recommended to apply migrations in the application startup
+// It is better to apply migrations manually or use specific pipeline for that
+// https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli
+// but for demo purposes, we will apply migrations in the application startup
+using (var scope = app.Services.CreateScope())
+{
+	var dbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
+	dbContext.Database.Migrate();
+}
 
 if (app.Environment.IsDevelopment())
 {

@@ -40,20 +40,38 @@ namespace OrderProcessing.Tests.Application
 				InvoiceAddress: "123 Main St",
 				InvoiceEmailAddress: "test@example.com",
 				InvoiceCreditCardNumber: "1234567890123452",
-				Products: [],
+				Products: 
+				[
+					new ProductDto
+					(
+						ProductId: 1,
+						ProductName: "Laptop",
+						ProductAmount: 2,
+						ProductPrice: 1500.00m
+					)
+				],
 				CreatedAt: createdAt
 			);
 			var order = new Order
 			{
 				Id = orderId,
-				Products = [],
 				Address = "123 Main St",
 				Email = "test@example.com",
 				CreditCard = "1234567890123452",
-				CreatedAt = DateTime.UtcNow
+				Products = 
+				[
+					new Product
+					(
+						ProductId: 1,
+						Name: "Laptop",
+						Amount: 2,
+						Price: 1500.00m
+					)
+				],
+				CreatedAt = createdAt
 			};
 
-			_mapperMock.Setup(mapper => mapper.Map<Order>(It.IsAny<CreateOrderCommand>())).Returns(order);
+			_mapperMock.Setup(mapper => mapper.Map<Order>(It.IsAny<OrderDto>())).Returns(order);
 			_orderRepositoryMock.Setup(repo => repo.AddAsync(order)).ReturnsAsync(orderId);
 
 			var command = new CreateOrderCommand { Order = orderDto };

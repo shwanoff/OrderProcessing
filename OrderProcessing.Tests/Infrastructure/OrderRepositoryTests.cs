@@ -50,14 +50,14 @@ namespace OrderProcessing.Tests.Infrastructure
 				[
 					new Product 
 					{ 
-						Id = 1, 
+						ProductId = 1, 
 						Name = "Laptop", 
 						Amount = 2, 
 						Price = 1500.00m 
 					},
 					new Product 
 					{ 
-						Id = 2, 
+						ProductId = 2, 
 						Name = "Mouse", 
 						Amount = 1, 
 						Price = 25.00m 
@@ -95,14 +95,16 @@ namespace OrderProcessing.Tests.Infrastructure
 				[
 					new ProductEntity 
 					{ 
-						Id = 1, 
+						Id= Guid.NewGuid(),
+						ProductId = 1, 
 						Name = "Laptop", 
 						Amount = 2, 
 						Price = 1500.00m 
 					},
 					new ProductEntity 
 					{ 
-						Id = 2, 
+						Id = Guid.NewGuid(),
+						ProductId = 2, 
 						Name = "Mouse", 
 						Amount = 1, 
 						Price = 25.00m 

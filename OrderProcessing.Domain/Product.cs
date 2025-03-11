@@ -1,7 +1,7 @@
 ﻿namespace OrderProcessing.Domain
 {
     public record Product(
-		uint Id, 
+		uint ProductId, 
 		string Name, 
 		uint Amount, 
 		decimal Price)

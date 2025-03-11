@@ -32,14 +32,14 @@ namespace OrderProcessing.Tests.Infrastructure
 				[
 					new Product 
 					( 
-						Id: 1, 
+						ProductId: 1, 
 						Name: "Laptop", 
 						Amount: 2, 
 						Price: 1500.00m 
 					),
 					new Product 
 					(
-						Id: 2, 
+						ProductId: 2, 
 						Name: "Mouse", 
 						Amount: 1, 
 						Price: 25.00m
@@ -113,7 +113,7 @@ namespace OrderProcessing.Tests.Infrastructure
 			// Arrange
 			var product = new Product
 			(
-				Id: 1,
+				ProductId: 1,
 				Name: "Laptop",
 				Amount: 2,
 				Price: 1500.00m
@@ -124,7 +124,7 @@ namespace OrderProcessing.Tests.Infrastructure
 
 			// Assert
 			Assert.That(productDto, Is.Not.Null);
-			Assert.That(productDto.ProductId, Is.EqualTo(product.Id));
+			Assert.That(productDto.ProductId, Is.EqualTo(product.ProductId));
 			Assert.That(productDto.ProductName, Is.EqualTo(product.Name));
 			Assert.That(productDto.ProductAmount, Is.EqualTo(product.Amount));
 			Assert.That(productDto.ProductPrice, Is.EqualTo(product.Price));
@@ -147,7 +147,7 @@ namespace OrderProcessing.Tests.Infrastructure
 
 			// Assert
 			Assert.That(product, Is.Not.Null);
-			Assert.That(product.Id, Is.EqualTo(productDto.ProductId));
+			Assert.That(product.ProductId, Is.EqualTo(productDto.ProductId));
 			Assert.That(product.Name, Is.EqualTo(productDto.ProductName));
 			Assert.That(product.Amount, Is.EqualTo(productDto.ProductAmount));
 			Assert.That(product.Price, Is.EqualTo(productDto.ProductPrice));
@@ -164,14 +164,14 @@ namespace OrderProcessing.Tests.Infrastructure
 				[
 					new Product 
 					( 
-						Id: 1, 
+						ProductId: 1, 
 						Name: "Laptop", 
 						Amount: 2, 
 						Price: 1500.00m 
 					),
 					new Product 
 					( 
-						Id: 2, 
+						ProductId: 2, 
 						Name: "Mouse", 
 						Amount: 1, 
 						Price: 25.00m 
@@ -203,11 +203,25 @@ namespace OrderProcessing.Tests.Infrastructure
 			var orderEntity = new OrderEntity
 			{
 				Id = Guid.NewGuid(),
-				Products = new List<ProductEntity>
-				{
-					new ProductEntity { Id = 1, Name = "Laptop", Amount = 2, Price = 1500.00m },
-					new ProductEntity { Id = 2, Name = "Mouse", Amount = 1, Price = 25.00m }
-				},
+				Products =
+				[
+					new ProductEntity 
+					{
+						Id = Guid.NewGuid(),
+						ProductId = 1, 
+						Name = "Laptop", 
+						Amount = 2, 
+						Price = 1500.00m 
+					},
+					new ProductEntity 
+					{
+						Id = Guid.NewGuid(),
+						ProductId = 2, 
+						Name = "Mouse", 
+						Amount = 1, 
+						Price = 25.00m 
+					}
+				],
 				Address = "123 Main St",
 				Email = "test@example.com",
 				CreditCard = "1234567890123452",
@@ -233,7 +247,7 @@ namespace OrderProcessing.Tests.Infrastructure
 			// Arrange
 			var product = new Product
 			(
-				Id: 1,
+				ProductId: 1,
 				Name: "Laptop",
 				Amount: 2,
 				Price: 1500.00m
@@ -244,7 +258,7 @@ namespace OrderProcessing.Tests.Infrastructure
 
 			// Assert
 			Assert.That(productEntity, Is.Not.Null);
-			Assert.That(productEntity.Id, Is.EqualTo(product.Id));
+			Assert.That(productEntity.ProductId, Is.EqualTo(product.ProductId));
 			Assert.That(productEntity.Name, Is.EqualTo(product.Name));
 			Assert.That(productEntity.Amount, Is.EqualTo(product.Amount));
 			Assert.That(productEntity.Price, Is.EqualTo(product.Price));
@@ -256,7 +270,7 @@ namespace OrderProcessing.Tests.Infrastructure
 			// Arrange
 			var productEntity = new ProductEntity
 			{
-				Id = 1,
+				ProductId = 1,
 				Name = "Laptop",
 				Amount = 2,
 				Price = 1500.00m
@@ -267,7 +281,7 @@ namespace OrderProcessing.Tests.Infrastructure
 
 			// Assert
 			Assert.That(product, Is.Not.Null);
-			Assert.That(product.Id, Is.EqualTo(productEntity.Id));
+			Assert.That(product.ProductId, Is.EqualTo(productEntity.ProductId));
 			Assert.That(product.Name, Is.EqualTo(productEntity.Name));
 			Assert.That(product.Amount, Is.EqualTo(productEntity.Amount));
 			Assert.That(product.Price, Is.EqualTo(productEntity.Price));

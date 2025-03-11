@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OrderProcessing.Application.Interfaces;
 using System.Reflection;
 
 namespace OrderProcessing.Infrastructure
@@ -15,6 +16,12 @@ namespace OrderProcessing.Infrastructure
 					cfg.RegisterServicesFromAssembly(Assembly.Load(assemblyName));
 			});
 
+			return services;
+		}
+
+		public static IServiceCollection AddRepository(this IServiceCollection services)
+		{
+			services.AddScoped<IOrderRepository, OrderRepository>();
 			return services;
 		}
 	}

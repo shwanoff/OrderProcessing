@@ -31,8 +31,22 @@ namespace OrderProcessing.Tests.Infrastructure
 				CreatedAt = DateTime.UtcNow,
 				Products =
 				[
-					new() { Id = 1, Name = "Laptop", Amount = 2, Price = 1500.00m },
-					new() { Id = 2, Name = "Mouse", Amount = 1, Price = 25.00m }
+					new ProductEntity 
+					{ 
+						Id = Guid.NewGuid(),
+						ProductId = 1,
+						Name = "Laptop", 
+						Amount = 2, 
+						Price = 1500.00m 
+					},
+					new ProductEntity 
+					{ 
+						Id = Guid.NewGuid(),
+						ProductId = 2, 
+						Name = "Mouse", 
+						Amount = 1, 
+						Price = 25.00m 
+					}
 				]
 			};
 

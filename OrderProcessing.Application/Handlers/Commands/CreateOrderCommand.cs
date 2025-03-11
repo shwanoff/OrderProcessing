@@ -23,7 +23,7 @@ namespace OrderProcessing.Application.Handlers.Commands
 		{
 			try
 			{
-				var order = _mapper.Map<Order>(request);
+				var order = _mapper.Map<Order>(request.Order);
 				await _orderRepository.AddAsync(order);
 				
 				_logger.LogInformation("Order created: {OrderId}", order.Id);

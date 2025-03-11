@@ -25,12 +25,12 @@ namespace OrderProcessing.Infrastructure
 				.ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt));
 
 			CreateMap<Product, ProductDto>()
-				.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Id))
+				.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
 				.ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Name))
 				.ForMember(dest => dest.ProductAmount, opt => opt.MapFrom(src => src.Amount))
 				.ForMember(dest => dest.ProductPrice, opt => opt.MapFrom(src => src.Price))
 				.ReverseMap()
-				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ProductId))
+				.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductName))
 				.ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.ProductAmount))
 				.ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.ProductPrice));
@@ -51,12 +51,13 @@ namespace OrderProcessing.Infrastructure
 				.ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt));
 
 			CreateMap<Product, ProductEntity>()
-				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+				.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
 				.ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount))
 				.ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+				.ForMember(dest => dest.Id, opt => opt.Ignore())
 				.ReverseMap()
-				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+				.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
 				.ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount))
 				.ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price));
