@@ -14,11 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 
 Log.Logger = new LoggerConfiguration()
-	.MinimumLevel.Debug()
-	.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-	.Enrich.FromLogContext()
-	.WriteTo.Console()
-	.WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+	.ReadFrom.Configuration(builder.Configuration)
 	.CreateLogger();
 
 builder.Host.UseSerilog();
