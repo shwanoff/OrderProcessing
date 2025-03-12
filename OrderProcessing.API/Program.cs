@@ -1,15 +1,27 @@
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using MartinCostello.OpenApi;
 using Microsoft.EntityFrameworkCore;
 using OrderProcessing.Application.Handlers.Commands;
 using OrderProcessing.Infrastructure;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+
+Log.Logger = new LoggerConfiguration()
+	.MinimumLevel.Debug()
+	.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+	.Enrich.FromLogContext()
+	.WriteTo.Console()
+	.WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+	.CreateLogger();
+
+builder.Host.UseSerilog();
 
 builder.Services.AddLogging();
 
