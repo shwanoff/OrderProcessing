@@ -14,6 +14,7 @@ The Order Processing System is a .NET 9 microservice designed to manage orders a
 - FluentValidation for request validation.
 - Serilog for structured logging.
 - NUnit for testing.
+- MediatR for command/query handling.
 
 ## Installation
 1. Clone the repository:
