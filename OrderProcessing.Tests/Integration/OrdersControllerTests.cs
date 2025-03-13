@@ -17,6 +17,13 @@ namespace OrderProcessing.Tests.Integration
 			_client = _factory.CreateClient();
 		}
 
+		[TearDown]
+		public void TearDown()
+		{
+			_client.Dispose();
+			_factory.Dispose();
+		}
+
 		[Test]
 		public async Task CreateOrder_ReturnsCreatedOrderId()
 		{
