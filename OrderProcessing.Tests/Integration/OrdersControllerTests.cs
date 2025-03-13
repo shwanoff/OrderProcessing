@@ -18,22 +18,22 @@ namespace OrderProcessing.Tests.Integration
 		}
 
 		[Test]
-		public async Task CreateOrder_ReturnsCreatedOrder()
+		public async Task CreateOrder_ReturnsCreatedOrderId()
 		{
 			// Arrange
 			var orderDto = new OrderDto
 			{
-				InvoiceAddress = "123 Sample Street, 90402 Berlin",
-				InvoiceEmailAddress = "customer@example.com",
-				InvoiceCreditCardNumber = "1234-5678-9101-1121",
+				InvoiceAddress = "123 Main St",
+				InvoiceEmailAddress = "test@example.com",
+				InvoiceCreditCardNumber = "1234567890123452",
 				Products =
 				[
 					new ProductDto
 					{
-						ProductId = 12345,
-						ProductName = "Gaming Laptop",
+						ProductId = 1,
+						ProductName = "Laptop",
 						ProductAmount = 2,
-						ProductPrice = 1499.99m
+						ProductPrice = 1500.00m
 					}
 				]
 			};
@@ -51,17 +51,17 @@ namespace OrderProcessing.Tests.Integration
 			// Arrange
 			var orderDto = new OrderDto
 			{
-				InvoiceAddress = "123 Sample Street, 90402 Berlin",
-				InvoiceEmailAddress = "customer@example.com",
-				InvoiceCreditCardNumber = "1234-5678-9101-1121",
+				InvoiceAddress = "123 Main St",
+				InvoiceEmailAddress = "test@example.com",
+				InvoiceCreditCardNumber = "1234567890123452",
 				Products =
 				[
 					new ProductDto
 					{
-						ProductId = 12345,
-						ProductName = "Gaming Laptop",
+						ProductId = 1,
+						ProductName = "Laptop",
 						ProductAmount = 2,
-						ProductPrice = 1499.99m
+						ProductPrice = 1500.00m
 					}
 				]
 			};
@@ -79,6 +79,165 @@ namespace OrderProcessing.Tests.Integration
 			var returnedOrder = await response.Content.ReadFromJsonAsync<OrderDto>();
 			Assert.That(returnedOrder, Is.Not.Null);
 			Assert.That(returnedOrder.OrderNumber, Is.EqualTo(orderId));
+		}
+
+		[Test]
+		public async Task CreateOrder_WithInvalidEmail_ReturnsBadRequest()
+		{
+			// Arrange
+			var orderDto = new OrderDto
+			{
+				InvoiceAddress = "123 Main St",
+				InvoiceEmailAddress = "invalid-email",
+				InvoiceCreditCardNumber = "1234567890123452",
+				Products =
+				[
+					new ProductDto
+					{
+						ProductId = 1,
+						ProductName = "Laptop",
+						ProductAmount = 2,
+						ProductPrice = 1500.00m
+					}
+				]
+			};
+
+			// Act
+			var response = await _client.PostAsJsonAsync("/api/orders", orderDto);
+
+			// Assert
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+		}
+
+		[Test]
+		public async Task CreateOrder_WithEmptyInvoiceAddress_ReturnsBadRequest()
+		{
+			// Arrange
+			var orderDto = new OrderDto
+			{
+				InvoiceAddress = "",
+				InvoiceEmailAddress = "test@example.com",
+				InvoiceCreditCardNumber = "1234567890123452",
+				Products =
+				[
+					new ProductDto
+					{
+						ProductId = 1,
+						ProductName = "Laptop",
+						ProductAmount = 2,
+						ProductPrice = 1500.00m
+					}
+				]
+			};
+
+			// Act
+			var response = await _client.PostAsJsonAsync("/api/orders", orderDto);
+
+			// Assert
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+		}
+
+		[Test]
+		public async Task CreateOrder_WithInvalidCreditCardNumber_ReturnsBadRequest()
+		{
+			// Arrange
+			var orderDto = new OrderDto
+			{
+				InvoiceAddress = "123 Main St",
+				InvoiceEmailAddress = "test@example.com",
+				InvoiceCreditCardNumber = "invalid-credit-card",
+				Products =
+				[
+					new ProductDto
+					{
+						ProductId = 1,
+						ProductName = "Laptop",
+						ProductAmount = 2,
+						ProductPrice = 1500.00m
+					}
+				]
+			};
+
+			// Act
+			var response = await _client.PostAsJsonAsync("/api/orders", orderDto);
+
+			// Assert
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+		}
+
+		[Test]
+		public async Task CreateOrder_WithEmptyProductsList_ReturnsBadRequest()
+		{
+			// Arrange
+			var orderDto = new OrderDto
+			{
+				InvoiceAddress = "123 Main St",
+				InvoiceEmailAddress = "test@example.com",
+				InvoiceCreditCardNumber = "1234567890123452",
+				Products = new List<ProductDto>()
+			};
+
+			// Act
+			var response = await _client.PostAsJsonAsync("/api/orders", orderDto);
+
+			// Assert
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+		}
+
+		[Test]
+		public async Task CreateOrder_WithNegativeProductAmount_ReturnsBadRequest()
+		{
+			// Arrange
+			var orderDto = new OrderDto
+			{
+				InvoiceAddress = "123 Main St",
+				InvoiceEmailAddress = "test@example.com",
+				InvoiceCreditCardNumber = "1234567890123452",
+				Products =
+				[
+					new ProductDto
+					{
+						ProductId = 1,
+						ProductName = "Laptop",
+						ProductAmount = -1,
+						ProductPrice = 1500.00m
+					}
+				]
+			};
+
+			// Act
+			var response = await _client.PostAsJsonAsync("/api/orders", orderDto);
+
+			// Assert
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+		}
+
+		[Test]
+		public async Task CreateOrder_WithNegativeProductPrice_ReturnsBadRequest()
+		{
+			// Arrange
+			var orderDto = new OrderDto
+			{
+				InvoiceAddress = "123 Main St",
+				InvoiceEmailAddress = "test@example.com",
+				InvoiceCreditCardNumber = "1234567890123452",
+				Products =
+				[
+					new ProductDto
+					{
+						ProductId = 1,
+						ProductName = "Laptop",
+						ProductAmount = 2,
+						ProductPrice = -10.00m
+					}
+				]
+			};
+
+			// Act
+			var response = await _client.PostAsJsonAsync("/api/orders", orderDto);
+
+			// Assert
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
 		}
 	}
 }

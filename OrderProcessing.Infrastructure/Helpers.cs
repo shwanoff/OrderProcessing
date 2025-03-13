@@ -65,6 +65,7 @@ namespace OrderProcessing.Infrastructure
 		public static void AddFluentValidation(this IServiceCollection services)
 		{
 			services.AddValidatorsFromAssemblyContaining<CreateOrderCommandValidator>();
+			services.AddValidatorsFromAssemblyContaining<CreateOrderValidator>();
 			services.AddFluentValidationAutoValidation();
 		}
 
